@@ -26,9 +26,9 @@ class Znjj(unittest.TestCase):
         print('测试结束')
 
     def test_1_test_login(self):
-        rows = handle.get_rows(self.url)
+        rows = handle.get_rows()
         for i in range(rows):
-            data = handle.get_rows_value(self.url, i + 2)
+            data = handle.get_rows_value( i + 2)
             is_run = data[2]
             if is_run == 'yes':
                 method = data[6]
@@ -39,6 +39,10 @@ class Znjj(unittest.TestCase):
                 json_res = res
                 print(json.dumps(json_res, indent=2, ensure_ascii=False))
                 self.assertEqual(json_res["description"], " 登陆成功", msg="登陆失败")
+
+
+
+
 
     def test_2_register(self):
         global user
@@ -61,7 +65,7 @@ class Znjj(unittest.TestCase):
             register = "注册失败,请重新注册"
         print(json.dumps(json_res, indent=2, ensure_ascii=False))
         array = [user, pwd, register]
-        handle.write_cell_content(self.url, array)
+        handle.write_cell_content(array)
         print("账号: "+ str(user))
         print("密码：" + str(pwd))
     def test_3_login(self):
@@ -69,9 +73,9 @@ class Znjj(unittest.TestCase):
             "Content-Type": "application/json"
         }
         index = 1
-        rows = handle.get_rows(self.url, index)
+        rows = handle.get_rows(index)
         for i in range(rows):
-            data = handle.get_rows_value(self.url, i + 2, index)
+            data = handle.get_rows_value( i + 2, index)
             userAccount = data[0]
             if userAccount == user:
                 userPassword = data[1]
