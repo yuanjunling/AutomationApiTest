@@ -28,7 +28,7 @@ class Znjj(unittest.TestCase):
     def test_1_test_login(self):
         rows = handle.get_rows()
         for i in range(rows):
-            data = handle.get_rows_value( i + 2)
+            data = handle.get_rows_value(i + 2)
             is_run = data[2]
             if is_run == 'yes':
                 method = data[6]
@@ -38,11 +38,17 @@ class Znjj(unittest.TestCase):
                 res = request.run_main(method, url=log_url, headers=headers, json=json1)
                 json_res = res
                 print(json.dumps(json_res, indent=2, ensure_ascii=False))
-                self.assertEqual(json_res["description"], " 登陆成功", msg="登陆失败")
-
-
-
-
+                message=json_res["description"]
+                # if message == " 登陆成功":
+                #     handle.excel_write_data(i + 2, 15, "测试通过")
+                # else:
+                #     handle.excel_write_data(i + 2, 15, "测试失败")
+                try:
+                    self.assertEqual(message, " 登陆成功")
+                    handle.excel_write_data(i+2, 15, "测试通过")
+                except Exception as e:
+                    handle.excel_write_data(i+2, 15, "测试失败")
+                    raise e
 
     def test_2_register(self):
         global user
