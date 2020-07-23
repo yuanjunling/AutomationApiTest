@@ -1,5 +1,6 @@
 # coding=utf-8
-
+from Data.Birthday import get_birthday
+from Data.GenArea import Gen_area
 class IdNumber(str):
     def __init__(self, id_number):
         super(IdNumber, self).__init__()
@@ -17,14 +18,13 @@ class IdNumber(str):
     def generate_myid(cls):
         generate_ids = []
         # 随机生成一个区域码(6位数)
-        area_code = "412826"
+        area_code = Gen_area()
         # 限定出生日期范围(8位数)
-        birth_day = "19610420"
+        birth_day = get_birthday()
 
-        # 顺序码(2位数)
-        for i in range(2):
+        for i in range(1):
             sort_no = f"{i:02d}"
-            for j in [x for x in range(10) if x % 2 != 0]:
+            for j in [x for x in range(2) if x % 2 != 0]:
                 sex = j
                 prefix = f"{area_code}{birth_day}{sort_no}{sex}"
                 valid_bit = str(cls(prefix).get_check_digit())
@@ -34,7 +34,7 @@ class IdNumber(str):
 
 if __name__ == "__main__":
     generate_ids = IdNumber.generate_myid()
-    print(len(generate_ids))
+    # print(len(generate_ids))
     for id in generate_ids:
         print(id)
 

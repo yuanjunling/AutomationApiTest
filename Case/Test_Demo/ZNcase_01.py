@@ -39,10 +39,6 @@ class Znjj(unittest.TestCase):
                 json_res = res
                 print(json.dumps(json_res, indent=2, ensure_ascii=False))
                 message=json_res["description"]
-                # if message == " 登陆成功":
-                #     handle.excel_write_data(i + 2, 15, "测试通过")
-                # else:
-                #     handle.excel_write_data(i + 2, 15, "测试失败")
                 try:
                     self.assertEqual(message, " 登陆成功")
                     handle.excel_write_data(i+2, 15, "测试通过")
