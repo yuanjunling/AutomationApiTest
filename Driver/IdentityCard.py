@@ -1,6 +1,6 @@
 # coding=utf-8
-from Data.Birthday import get_birthday
-from Data.GenArea import Gen_area
+from Data.ID_Card_No.Birthday import get_birthday
+from Data.ID_Card_No.GenArea import Gen_area
 class IdNumber(str):
     def __init__(self, id_number):
         super(IdNumber, self).__init__()
@@ -29,14 +29,11 @@ class IdNumber(str):
                 prefix = f"{area_code}{birth_day}{sort_no}{sex}"
                 valid_bit = str(cls(prefix).get_check_digit())
                 generate_ids.append(f"{prefix}{valid_bit}")
-        return generate_ids
-
+        for number in generate_ids:
+            return number
 
 if __name__ == "__main__":
     generate_ids = IdNumber.generate_myid()
-    # print(len(generate_ids))
-    for id in generate_ids:
-        print(id)
-
+    print(generate_ids)
 
 
