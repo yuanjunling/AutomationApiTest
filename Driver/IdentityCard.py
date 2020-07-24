@@ -29,9 +29,7 @@ class IdNumber(str):
                 prefix = f"{area_code}{birth_day}{sort_no}{sex}"
                 valid_bit = str(cls(prefix).get_check_digit())
                 generate_ids.append(f"{prefix}{valid_bit}")
-        for number in generate_ids:
-            return number
-
+            return generate_ids[0]
 if __name__ == "__main__":
     generate_ids = IdNumber.generate_myid()
     print(generate_ids)

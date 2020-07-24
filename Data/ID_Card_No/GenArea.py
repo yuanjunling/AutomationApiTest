@@ -286,6 +286,4 @@ def Gen_area():
                 654300, 654301, 654321, 654322, 654323, 654324, 654325, 654326, 659000, 659001, 659002, 659003, 659004,
                 710000, 810000, 820000]
     slice = random.sample(area_num,1)
-    for i in slice:
-        pass
-    return i
+    return slice[0]

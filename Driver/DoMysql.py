@@ -6,11 +6,11 @@ class DoMysql:
     def __init__(self):
         #创建连接
         self.conn = pymysql.Connect(
-          host = 'localhost',
+          host = 'rm-uf67pz747a40ct135to.mysql.rds.aliyuncs.com',
           port = 3306,
-          user = 'root',
-          password = 'root',
-          db = 'testdb',
+          user = 'yjdf_mall',
+          password = 'o1r8sFcfNaQTlBnl',
+          db = 'yjdf_mall_account',
           charset = 'utf8',
           cursorclass = pymysql.cursors.DictCursor  #以字典的形式返回数据
         )
