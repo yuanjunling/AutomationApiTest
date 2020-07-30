@@ -1,6 +1,7 @@
 import random
-activityName= "jcx活动来一发{0}".format(random.randint(6, 999999))
-json_Save={"activityName":activityName,
+
+
+json_Save={"activityName":"activityName",
                  "activityImg":"http://yjdf-oss-uat.oss-cn-shanghai.aliyuncs.com/uat/2020/7/30/1596073329456.jpg",
                  "startTime":"2020-07-30 00:00:00",
                  "endTime":"2020-08-25 00:00:00",
@@ -48,3 +49,30 @@ json_Save={"activityName":activityName,
                  "approveList":[{"code":"PROVINCIAL_AGENT","description":"上级这条线上最近的省代","sequence":1},
                                 {"code":"SECOND_AGENT","description":"上级这条线上最近的二级","sequence":2}],
                  "approveIncludeSelf":True}
+
+json_apply = {"activityId":"86",
+              "addressDetail":"131313131313",
+              "provinceId":"130000",
+              "provinceName":"河北省",
+              "cityId":"130400",
+              "cityName":"邯郸市",
+              "countyId":"130423",
+              "countyName":"临漳县",
+              "receiverName":"tester",
+              "receiverPhone":"13444444444",
+              "expressAmount":3,
+              "totalAmount":341,
+              "skus":[
+                  {"goodsId":13,"goodsImg":"https://img.alicdn.com/imgextra/i1/4009987183/O1CN01uobtcz22vrYHmEvV1_!!0-item_pic.jpg","goodsName":"防晒小晶钻","price":180,"quantity":1,"quantityOptional":False,"skuId":13},
+                  {"goodsId":1,"goodsImg":"http://qiniu-dev.yjdfmall.com//Public/Uploads/ueditor/php/upload/image/Common/20200416/1587016974147277.jpg","goodsName":"商品1号","price":8,"quantity":1,"quantityOptional":False,"skuId":1},
+                  {"goodsId":9,"goodsImg":"http://qiniu-uat.yjdfmall.com//Public/Uploads/ueditor/php/upload/image/Common/20200703/1593747815717914.jpg","goodsName":"姬存希轻透炫彩气垫BB霜（1+1）","price":150,"quantity":1,"quantityOptional":False,"skuId":9}
+              ]
+              }
+
+json_agree ={
+    "activityId":"107",
+    "applyUserId":"46087",
+    "applyNumbers":1,
+    "applyId":148
+             }
+
