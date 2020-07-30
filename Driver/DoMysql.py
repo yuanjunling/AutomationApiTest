@@ -3,14 +3,15 @@ import pymysql
 
 class DoMysql:
     #初始化
-    def __init__(self):
+    def __init__(self,db1):
+        self.db=db1
         #创建连接
         self.conn = pymysql.Connect(
           host = 'rm-uf67pz747a40ct135to.mysql.rds.aliyuncs.com',
           port = 3306,
           user = 'yjdf_mall',
           password = 'o1r8sFcfNaQTlBnl',
-          db = 'yjdf_mall_account',
+          db = self.db,
           charset = 'utf8',
           cursorclass = pymysql.cursors.DictCursor  #以字典的形式返回数据
         )
@@ -46,7 +47,7 @@ class DoMysql:
         self.conn.close()
 
 
-db = DoMysql()
+db = DoMysql("yjdf_mall_orders")
 
 if __name__ == '__main__':
     mysql  = DoMysql()
