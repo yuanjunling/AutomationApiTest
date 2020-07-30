@@ -20,6 +20,7 @@ class Sunscreen(unittest.TestCase):
         self.publish = rootpath + "/mgmt/activity/publish/{}"
         self.applyurl = rootpath + "/activity/apply"
         self.agree = rootpath + "/activity/apply/agree"
+        self.reject = rootpath + "/activity/apply/reject"
         self.mysql = DoMysql("yjdf_mall_orders")
 
     def tearDown(self):
@@ -74,9 +75,25 @@ class Sunscreen(unittest.TestCase):
         sql = "SELECT id,user_id FROM t_activity_apply_info WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
         json_agree['activityId']=result[0]['id']
-        json_agree['applyId']=results[0]['id']
+        # json_agree['applyId']=results[0]['id']
         json_agree['applyUserId'] =results[0]['user_id']
         res = request.run_main('post', url=self.agree, headers=headers_Sunscreen_h5_01, json=json_agree)
+        json_res = res
+        try:
+            self.assertEqual(json_res["success"], True)
+            print(json.dumps(json_res, indent=2, ensure_ascii=False))
+        except Exception as e:
+            print(json.dumps(json_res, indent=2, ensure_ascii=False))
+            raise e
+    @unittest.skip("test_05_reject暂时不需要执行")
+    def test_05_reject(self):
+        '''省级审批拒绝'''
+        sql = "SELECT id,user_id FROM t_activity_apply_info WHERE activity_id = '{}'".format(result[0]['id'])
+        results = self.mysql.fetchAll(sql)
+        json_agree['activityId']=result[0]['id']
+        # json_agree['applyId']=results[0]['id']
+        json_agree['applyUserId'] =results[0]['user_id']
+        res = request.run_main('post', url=self.reject, headers=headers_Sunscreen_h5_01, json=json_agree)
         json_res = res
         try:
             self.assertEqual(json_res["success"], True)

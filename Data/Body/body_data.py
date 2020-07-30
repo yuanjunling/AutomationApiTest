@@ -72,7 +72,6 @@ json_apply = {"activityId":"86",
 json_agree ={
     "activityId":"107",
     "applyUserId":"46087",
-    "applyNumbers":1,
-    "applyId":148
+    "applyNumbers":1
              }
 
