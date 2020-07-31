@@ -86,3 +86,11 @@ json_generate = {
 }
 
 json_page = {"status":"","pageNo":1,"pageSize":10}
+
+json_saveVoucher = {
+    "id":"89",
+    "voucherList":["http://yjdf-oss-uat.oss-cn-shanghai.aliyuncs.com/uat/2020/7/31/veer-151707721.jpg"]
+}
+
+json_operate = {"type":1,"orderIdList":[93]}
+json_operate['orderIdList'][0]=88

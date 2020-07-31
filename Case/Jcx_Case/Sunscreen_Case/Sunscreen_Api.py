@@ -34,6 +34,9 @@ class Sunscreen(unittest.TestCase):
         self.reject = rootpath + "/activity/apply/reject"
         self.generate = rootpath + "/activity/order/generate"
         self.page =rootpath +"/activity/order/page"
+        self.saveVoucher = rootpath + "/activity/order/saveVoucher"
+        self.operate = rootpath + "/mgmt/order/operate"
+        self.push = rootpath +"/mgmt/order/push/{}"
         self.mysql = DoMysql("yjdf_mall_orders")
 
     def tearDown(self):
@@ -41,7 +44,7 @@ class Sunscreen(unittest.TestCase):
 
     # @unittest.skip("test_01_reject暂时不需要执行")
     def test_01_Save(self):
-        '''添加活动'''
+        '''后台添加活动'''
         global activityName
         activityName = "姬存希防晒活动yuan{0}".format(random.randint(6, 999999))
         print("活动名称："+activityName)
@@ -152,7 +155,7 @@ class Sunscreen(unittest.TestCase):
             print(json.dumps(json_res_generate, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_generate, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_08_reject暂时不需要执行")
+    @unittest.skip("test_08_reject暂时不需要执行")
     def test_08_page(self):
         '''活动订单分页列表'''
         page=self.page
@@ -165,5 +168,57 @@ class Sunscreen(unittest.TestCase):
             print(json.dumps(json_res_page, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_page, indent=2, ensure_ascii=False))
+
+    # @unittest.skip("test_09_reject暂时不需要执行")
+    def test_09_saveVoucher(self):
+        '''保存支付凭证'''
+        saveVoucher = self.saveVoucher
+        sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
+        results = self.mysql.fetchAll(sql)
+        json_saveVoucher['id']=results[0]['id']
+        saveVoucher_res = request.run_main('post', url=saveVoucher, headers=headers_Sunscreen_h5_Two, json=json_saveVoucher)
+        json_res_saveVoucher = saveVoucher_res
+        try:
+            self.assertEqual(json_res_saveVoucher["success"], True)
+            print(json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
+        except Exception as e:
+            print(json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
+            raise e
+        logger.debug("this= %r", json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
+
+    # @unittest.skip("test_10_reject暂时不需要执行")
+    def test_10_operate(self):
+        '''操作订单审批通过或不通过'''
+        operate=self.operate
+        sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
+        results = self.mysql.fetchAll(sql)
+        json_operate['orderIdList'][0]=results[0]['id']
+        operate_res = request.run_main('post', url=operate, headers=headers_Sunscreen_web, json=json_operate)
+        json_res_operate = operate_res
+        try:
+            self.assertEqual(json_res_operate["success"], True)
+            print(json.dumps(json_res_operate, indent=2, ensure_ascii=False))
+        except Exception as e:
+            print(json.dumps(json_res_operate, indent=2, ensure_ascii=False))
+            raise e
+        logger.debug("this= %r", json.dumps(json_res_operate, indent=2, ensure_ascii=False))
+
+    # @unittest.skip("test_11_reject暂时不需要执行")
+    def test_11_operate(self):
+        '''推送ERP'''
+        push=self.push
+        sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
+        results = self.mysql.fetchAll(sql)
+        push=self.push.format(results[0]['id'])
+        push_res = request.run_main('get', url=push, headers=headers_Sunscreen_web)
+        json_res_push = push_res
+        try:
+            self.assertEqual(json_res_push["success"], True)
+            print(json.dumps(json_res_push, indent=2, ensure_ascii=False))
+        except Exception as e:
+            print(json.dumps(json_res_push, indent=2, ensure_ascii=False))
+            raise e
+        logger.debug("this= %r", json.dumps(json_res_push, indent=2, ensure_ascii=False))
+
 if __name__ == '__main__':
     unittest.main()
