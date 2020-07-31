@@ -75,3 +75,12 @@ json_agree ={
     "applyNumbers":1
              }
 
+json_Two={
+    "activityId":"141",
+    "applyUserId":"46086",
+    "applyNumbers":1
+    }
+json_generate = {
+    "activityId":"143",
+    "totalUserNum":1
+}

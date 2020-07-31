@@ -9,7 +9,7 @@ from Driver.handle_init import handle_ini
 from Case.Jcx_Case.Sunscreen_Case import Sunscreen_Api
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(Sunscreen_Api.Sunscreen))
-now = time.strftime("%Y-%m-%M-%H_%M_%S", time.localtime(time.time()))
+now = time.strftime("%Y-%m-%d %H_%M_%S", time.localtime(time.time()))
 rootpath = handle_ini.get_value('rootpath')
 file_path = rootpath + "/Report/"
 
