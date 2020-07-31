@@ -116,7 +116,6 @@ class Sunscreen(unittest.TestCase):
         json_res = res
         try:
             print(json.dumps(json_res, indent=2, ensure_ascii=False))
-            json.dumps(json_res, indent=2, ensure_ascii=False)
         except Exception as e:
             print(json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
@@ -133,7 +132,6 @@ class Sunscreen(unittest.TestCase):
         json_res = res
         try:
             print(json.dumps(json_res, indent=2, ensure_ascii=False))
-            json.dumps(json_res, indent=2, ensure_ascii=False)
         except Exception as e:
             print(json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
