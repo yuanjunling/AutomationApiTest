@@ -84,3 +84,5 @@ json_generate = {
     "activityId":"143",
     "totalUserNum":1
 }
+
+json_page = {"status":"","pageNo":1,"pageSize":10}

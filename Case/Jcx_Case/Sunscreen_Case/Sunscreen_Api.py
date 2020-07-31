@@ -33,6 +33,7 @@ class Sunscreen(unittest.TestCase):
         self.agree = rootpath + "/activity/apply/agree"
         self.reject = rootpath + "/activity/apply/reject"
         self.generate = rootpath + "/activity/order/generate"
+        self.page =rootpath +"/activity/order/page"
         self.mysql = DoMysql("yjdf_mall_orders")
 
     def tearDown(self):
@@ -136,6 +137,9 @@ class Sunscreen(unittest.TestCase):
             print(json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
+
+    # @unittest.skip("test_07_reject暂时不需要执行")
+    def test_07_generate_two(self):
         '''二级一键生成采购单'''
         generate = self.generate
         json_generate['activityId'] = result[0]['id']
@@ -148,6 +152,18 @@ class Sunscreen(unittest.TestCase):
             print(json.dumps(json_res_generate, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_generate, indent=2, ensure_ascii=False))
-
+    # @unittest.skip("test_08_reject暂时不需要执行")
+    def test_08_page(self):
+        '''活动订单分页列表'''
+        page=self.page
+        res_page = request.run_main('post', url=page, headers=headers_Sunscreen_h5_Two, json=json_page)
+        json_res_page = res_page
+        try:
+            self.assertEqual(json_res_page["success"], True)
+            print(json.dumps(json_res_page, indent=2, ensure_ascii=False))
+        except Exception as e:
+            print(json.dumps(json_res_page, indent=2, ensure_ascii=False))
+            raise e
+        logger.debug("this= %r", json.dumps(json_res_page, indent=2, ensure_ascii=False))
 if __name__ == '__main__':
     unittest.main()
