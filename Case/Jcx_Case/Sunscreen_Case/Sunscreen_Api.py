@@ -1,9 +1,6 @@
 # coding=utf-8
 import json
-import random
 import unittest
-import string
-
 from Data.Body.body_data import *
 from Driver.DoMysql import DoMysql
 from Driver.base_request import request
@@ -38,6 +35,7 @@ class Sunscreen(unittest.TestCase):
         self.operate = rootpath + "/mgmt/order/operate"
         self.push = rootpath +"/mgmt/order/push/{}"
         self.mysql = DoMysql("yjdf_mall_orders")
+
 
     def tearDown(self):
         print('测试结束')
@@ -206,11 +204,10 @@ class Sunscreen(unittest.TestCase):
     # @unittest.skip("test_11_reject暂时不需要执行")
     def test_11_operate(self):
         '''推送ERP'''
-        push=self.push
         sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
-        push=self.push.format(results[0]['id'])
-        push_res = request.run_main('get', url=push, headers=headers_Sunscreen_web)
+        push1=self.push.format(results[0]['id'])
+        push_res = request.run_main('get', url=push1, headers=headers_Sunscreen_web)
         json_res_push = push_res
         try:
             self.assertEqual(json_res_push["success"], True)
