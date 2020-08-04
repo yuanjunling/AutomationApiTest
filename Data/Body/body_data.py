@@ -92,5 +92,20 @@ json_saveVoucher = {
     "voucherList":["http://yjdf-oss-uat.oss-cn-shanghai.aliyuncs.com/uat/2020/7/31/veer-151707721.jpg"]
 }
 
+json_activity_page={"pageNo":1,"pageSize":10}
 json_operate = {"type":1,"orderIdList":[93]}
-json_operate['orderIdList'][0]=88
+json_pageApprove={
+    "activityId":20
+}
+json_pageApproveItem = {
+    "activityId": "3042",
+    "approveUserId": "459712",
+    "status": "1",
+    "keyword": "",
+    "pageNo": 1,
+    "pageSize": 10
+}
+json_pageApply={
+    "activityId":329
+}
+

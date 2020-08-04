@@ -1,18 +1,19 @@
 
-import setuptools
+from setuptools import setup
+from setuptools import find_packages
 with open("README.md","r") as fh:
     long_description = fh.read()
-setuptools.setup(
+setup(
     name="Sunscreen_Api_Test",
-    version="0.0.3",
+    version="0.0.7",
     author="yuanjunling",
     author_email = "261412489@qq.com",
     description = "接口自动化测试框架",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yuanjunling/AutomationApiTest",
+    url="https://github.com/yuanjunling/AutomationApiTest.git",
     include_package_data=True,
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
