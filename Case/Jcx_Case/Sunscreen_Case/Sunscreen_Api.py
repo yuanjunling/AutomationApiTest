@@ -40,6 +40,7 @@ class Sunscreen(unittest.TestCase):
         self.pageApproveItem = rootpath + "/activity/apply/pageApproveItem"
         self.User_info=rootpath+"/activity/apply/{}"
         self.pageApply=rootpath+"/mgmt/activity/pageApply"
+        self.Slideshow = rootpath+"/activity/apply/preCheck/{}"
         self.mysql = DoMysql("yjdf_mall_orders")
 
     def tearDown(self):
@@ -81,10 +82,23 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
 
+    # @unittest.skip("test_03_reject暂时不需要执行")
+    def test_03_Slideshow(self):
+        '''首页轮播进入活动校验'''
+        Slideshow = self.Slideshow.format(result[0]['id'])
+        res = request.run_main('post', url=Slideshow, headers=headers_Sunscreen_h5_City)
+        json_res = res
+        try:
+            self.assertEqual(json_res["success"], True)
+            self.assertEqual(json_res['code'], '200')
+            print('首页轮播进入活动校验测试用例通过： %s' % json_res["success"])
+        except Exception as e:
+            print("首页轮播进入活动校验测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            raise e
+        logger.debug("this= %r", json.dumps(json_res, indent=2, ensure_ascii=False))
     # @unittest.skip("test_04_reject暂时不需要执行")
-    def test_03_apply(self):
+    def test_04_apply(self):
         '''市级代理活动报名'''
-
         json_apply['receiverName'] =GenPass()
         json_apply['activityId']=result[0]['id']
         json_apply['receiverPhone']=random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8))
@@ -99,8 +113,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_03_reject暂时不需要执行")
-    def test_04_pageApply(self):
+    # @unittest.skip("test_05_reject暂时不需要执行")
+    def test_05_pageApply(self):
         '''报名记录'''
         pageApply = self.pageApply
         # print(result[0]['id'])
@@ -117,8 +131,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r", json.dumps(json_res, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_05_reject暂时不需要执行")
-    def test_05_User_info(self):
+    # @unittest.skip("test_06_reject暂时不需要执行")
+    def test_06_User_info(self):
         '''获取用户报名信息'''
         User_info=self.User_info.format(result[0]['id'])
         res = request.run_main('post', url=User_info, headers=headers_Sunscreen_h5_City)
@@ -131,8 +145,8 @@ class Sunscreen(unittest.TestCase):
             print("获取用户报名信息测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_06_reject暂时不需要执行")
-    def test_06_agree(self):
+    # @unittest.skip("test_07_reject暂时不需要执行")
+    def test_07_agree(self):
         '''省级审批通过'''
         sql = "SELECT id,user_id FROM t_activity_apply_info WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
@@ -149,8 +163,8 @@ class Sunscreen(unittest.TestCase):
             print("省级审批通过测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
-    @unittest.skip("test_07_reject暂时不需要执行")
-    def test_07_reject(self):
+    @unittest.skip("test_08_reject暂时不需要执行")
+    def test_08_reject(self):
         '''省级审批拒绝'''
         sql = "SELECT id,user_id FROM t_activity_apply_info WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
@@ -167,8 +181,8 @@ class Sunscreen(unittest.TestCase):
             print("省级审批拒绝测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_08_reject暂时不需要执行")
-    def test_08_agree_two(self):
+    # @unittest.skip("test_09_reject暂时不需要执行")
+    def test_09_agree_two(self):
         '''二级审批通过'''
         sql = "SELECT id,province_id FROM t_activity_apply_info WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
@@ -186,8 +200,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_09_reject暂时不需要执行")
-    def test_09_generate_two(self):
+    # @unittest.skip("test_10_reject暂时不需要执行")
+    def test_10_generate_two(self):
         '''二级一键生成采购单'''
         generate = self.generate
         json_generate['activityId'] = result[0]['id']
@@ -201,8 +215,8 @@ class Sunscreen(unittest.TestCase):
             print("二级一键生成采购单测试用例通过不通过%s" % json.dumps(json_res_generate, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_generate, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_10_reject暂时不需要执行")
-    def test_10_page(self):
+    # @unittest.skip("test_11_reject暂时不需要执行")
+    def test_11_page(self):
         '''活动订单分页列表'''
         page=self.page
         res_page = request.run_main('post', url=page, headers=headers_Sunscreen_h5_Two, json=json_page)
@@ -216,8 +230,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r", json.dumps(json_res_page, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_11_reject暂时不需要执行")
-    def test_11_saveVoucher(self):
+    # @unittest.skip("test_12_reject暂时不需要执行")
+    def test_12_saveVoucher(self):
         '''保存支付凭证'''
         saveVoucher = self.saveVoucher
         sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
@@ -234,8 +248,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r", json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_12_reject暂时不需要执行")
-    def test_12_operate(self):
+    # @unittest.skip("test_13_reject暂时不需要执行")
+    def test_13_operate(self):
         '''操作订单审批通过或不通过'''
         operate=self.operate
         sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
@@ -251,8 +265,8 @@ class Sunscreen(unittest.TestCase):
             print("操作订单审批通过或不通过测试用例通过不通过%s" % json.dumps(json_res_operate, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_operate, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_13_reject暂时不需要执行")
-    def test_13_report(self):
+    # @unittest.skip("test_14_reject暂时不需要执行")
+    def test_14_report(self):
         '''团队业绩-总业绩'''
         report=self.report.format(result[0]['id'])
         report_res = request.run_main('post',url=report,headers=headers_Sunscreen_h5_Two)
@@ -266,8 +280,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r", json.dumps(json_report, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_14_reject暂时不需要执行")
-    def test_14_pageApprove(self):
+    # @unittest.skip("test_15_reject暂时不需要执行")
+    def test_15_pageApprove(self):
         '''团队业绩明细分页列表'''
         pageApprove=self.pageApprove
         json_pageApprove['activityId']=result[0]['id']
@@ -282,8 +296,8 @@ class Sunscreen(unittest.TestCase):
             raise e
         logger.debug("this= %r", json.dumps(json_res_pageApprove, indent=2, ensure_ascii=False))
 
-    # @unittest.skip("test_15_reject暂时不需要执行")
-    def test_15_pageApproveItem(self):
+    # @unittest.skip("test_16_reject暂时不需要执行")
+    def test_16_pageApproveItem(self):
         '''团队业绩明细-审批明细'''
         sql_user_id = "SELECT user_id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql_user_id)
@@ -301,8 +315,8 @@ class Sunscreen(unittest.TestCase):
             print("团队业绩明细-审批明细测试用例通过不通过%s" % json.dumps(json_res_pageApproveItem, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_pageApproveItem, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_16_reject暂时不需要执行")
-    def test_16_report(self):
+    # @unittest.skip("test_17_reject暂时不需要执行")
+    def test_17_report(self):
         '''抢购活动列表'''
         activity_page=self.activity_page
         activity_page_res = request.run_main('post', url=activity_page, headers=headers_Sunscreen_h5_Two,json=json_activity_page)
@@ -315,8 +329,8 @@ class Sunscreen(unittest.TestCase):
             print("抢购活动列表测试用例通过不通过%s" % json.dumps(json_res_activity_page, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_activity_page, indent=2, ensure_ascii=False))
-    # @unittest.skip("test_17_reject暂时不需要执行")
-    def test_17_operate(self):
+    # @unittest.skip("test_18_reject暂时不需要执行")
+    def test_18_operate(self):
         '''推送ERP'''
         sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
