@@ -60,7 +60,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('后台添加活动测试用例通过: %s'%json_res["success"])
         except Exception as e:
-            print("后台添加活动测试用例通过不通过%s"%json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("后台添加活动测试用例不通过%s"%json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
     # @unittest.skip("test_02_reject暂时不需要执行")
@@ -78,7 +78,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('活动上架测试用例通过: %s' % json_res["success"])
         except Exception as e:
-            print("活动上架测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("活动上架测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
 
@@ -93,7 +93,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('首页轮播进入活动校验测试用例通过： %s' % json_res["success"])
         except Exception as e:
-            print("首页轮播进入活动校验测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("首页轮播进入活动校验测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res, indent=2, ensure_ascii=False))
     # @unittest.skip("test_04_reject暂时不需要执行")
@@ -109,7 +109,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('市级代理活动报名测试用例通过： %s' % json_res["success"])
         except Exception as e:
-            print("市级代理活动报名测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("市级代理活动报名测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
 
@@ -127,7 +127,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res["data"]["list"][0]['applyStatusDesc'],'已报名')
             print('报名记录测试用例通过: %s' % json_res["success"])
         except Exception as e:
-            print("报名记录测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("报名记录测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res, indent=2, ensure_ascii=False))
 
@@ -142,7 +142,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('获取用户报名信息测试用例通过: %s' % json_res["success"])
         except Exception as e:
-            print("获取用户报名信息测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("获取用户报名信息测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
     # @unittest.skip("test_07_reject暂时不需要执行")
@@ -160,7 +160,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('省级审批通过测试用例通过: %s' % json_res["success"])
         except Exception as e:
-            print("省级审批通过测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("省级审批通过测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
     @unittest.skip("test_08_reject暂时不需要执行")
@@ -178,7 +178,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('省级审批拒绝测试用例通过: %s' % json_res["success"])
         except Exception as e:
-            print("省级审批拒绝测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("省级审批拒绝测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
     # @unittest.skip("test_09_reject暂时不需要执行")
@@ -196,7 +196,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res['code'], '200')
             print('二级审批通过测试用例通过: %s' % json_res["success"])
         except Exception as e:
-            print("二级审批通过测试用例通过不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            print("二级审批通过测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
 
@@ -212,7 +212,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_generate['code'], '200')
             print('二级一键生成采购单测试用例通过: %s' % json_res_generate["success"])
         except Exception as e:
-            print("二级一键生成采购单测试用例通过不通过%s" % json.dumps(json_res_generate, indent=2, ensure_ascii=False))
+            print("二级一键生成采购单测试用例不通过%s" % json.dumps(json_res_generate, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_generate, indent=2, ensure_ascii=False))
     # @unittest.skip("test_11_reject暂时不需要执行")
@@ -226,7 +226,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_page['code'], '200')
             print('活动订单分页列表测试用例通过: %s' % json_res_page["success"])
         except Exception as e:
-            print("活动订单分页列表测试用例通过不通过%s" % json.dumps(json_res_page, indent=2, ensure_ascii=False))
+            print("活动订单分页列表测试用例不通过%s" % json.dumps(json_res_page, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_page, indent=2, ensure_ascii=False))
 
@@ -244,7 +244,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_saveVoucher['code'], '200')
             print('保存支付凭证测试用例通过: %s' % json_res_saveVoucher["success"])
         except Exception as e:
-            print("保存支付凭证测试用例通过不通过%s" % json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
+            print("保存支付凭证测试用例不通过%s" % json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_saveVoucher, indent=2, ensure_ascii=False))
 
@@ -262,7 +262,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_operate['code'], '200')
             print('操作订单审批通过或不通过测试用例通过: %s' % json_res_operate["success"])
         except Exception as e:
-            print("操作订单审批通过或不通过测试用例通过不通过%s" % json.dumps(json_res_operate, indent=2, ensure_ascii=False))
+            print("操作订单审批通过或不通过测试用例不通过%s" % json.dumps(json_res_operate, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_operate, indent=2, ensure_ascii=False))
     # @unittest.skip("test_14_reject暂时不需要执行")
@@ -276,7 +276,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_report['code'], '200')
             print('团队业绩-总业绩测试用例通过: %s' % json_report["success"])
         except Exception as e:
-            print("团队业绩-总业绩测试用例通过不通过%s" % json.dumps(json_report, indent=2, ensure_ascii=False))
+            print("团队业绩-总业绩测试用例不通过%s" % json.dumps(json_report, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_report, indent=2, ensure_ascii=False))
 
@@ -292,7 +292,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_pageApprove['code'], '200')
             print('团队业绩明细分页列表测试用例通过: %s' % json_res_pageApprove["success"])
         except Exception as e:
-            print("团队业绩明细分页列表测试用例通过不通过%s" % json.dumps(json_res_pageApprove, indent=2, ensure_ascii=False))
+            print("团队业绩明细分页列表测试用例不通过%s" % json.dumps(json_res_pageApprove, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_pageApprove, indent=2, ensure_ascii=False))
 
@@ -312,7 +312,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_pageApproveItem["data"]["list"][0]['result'], '通过')
             print('团队业绩明细-审批明细测试用例通过: %s' % json_res_pageApproveItem["success"])
         except Exception as e:
-            print("团队业绩明细-审批明细测试用例通过不通过%s" % json.dumps(json_res_pageApproveItem, indent=2, ensure_ascii=False))
+            print("团队业绩明细-审批明细测试用例不通过%s" % json.dumps(json_res_pageApproveItem, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_pageApproveItem, indent=2, ensure_ascii=False))
     # @unittest.skip("test_17_reject暂时不需要执行")
@@ -326,7 +326,7 @@ class Sunscreen(unittest.TestCase):
             self.assertEqual(json_res_activity_page['code'], '200')
             print('抢购活动列表测试用例通过: %s' % json_res_activity_page["success"])
         except Exception as e:
-            print("抢购活动列表测试用例通过不通过%s" % json.dumps(json_res_activity_page, indent=2, ensure_ascii=False))
+            print("抢购活动列表测试用例不通过%s" % json.dumps(json_res_activity_page, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r", json.dumps(json_res_activity_page, indent=2, ensure_ascii=False))
     # @unittest.skip("test_18_reject暂时不需要执行")
@@ -340,9 +340,9 @@ class Sunscreen(unittest.TestCase):
         try:
             self.assertEqual(json_res_push["success"], True)
             self.assertEqual(json_res_push['code'], '200')
-            print('推送ERP测试用例通过：%s' % json_res_push["success"])
+            print(f'推送ERP测试用例通过：{json_res_push["success"]}')
         except Exception as e:
-            print("推送ERP测试用例通过不通过%s" % json.dumps(json_res_push, indent=2, ensure_ascii=False))
+            print(f"推送ERP测试用例不通过: {json.dumps(json_res_push, indent=2, ensure_ascii=False)}")
             raise e
         logger.debug("this= %r", json.dumps(json_res_push, indent=2, ensure_ascii=False))
 
