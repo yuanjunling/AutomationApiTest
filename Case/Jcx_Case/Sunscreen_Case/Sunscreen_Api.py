@@ -8,7 +8,7 @@ from Driver.GenPass import GenPass
 from Driver.handle_init import handle_ini
 from Data.Headers.headers_data import *
 import logging
-
+import emoji
 rootpath = handle_ini.get_value('rootpath')
 file_path = rootpath + "/Log/"
 logging.basicConfig(level=logging.DEBUG,  # 控制台打印的日志级别
@@ -50,7 +50,8 @@ class Sunscreen(unittest.TestCase):
     def test_01_Save(self):
         '''后台添加活动'''
         global activityName
-        activityName = "姬存希防晒活动yuan{0}".format(random.randint(6, 999999))
+        # activityName = emoji.emojize('姬存希活动yuan{0} :thumbs_up:').format(random.randint(6, 999999))
+        activityName="姬存希活动yuan{0}".format(random.randint(6,999999))
         print("活动名称："+activityName)
         json_Save['activityName']=activityName
         res = request.run_main('post',url=self.SaveUrl,headers=headers_Sunscreen_web,json=json_Save)
