@@ -42,12 +42,12 @@ class HandExcel:
         wb.save("E:\AutomationApiTest\Data\case_01.xlsx")
         # 调用此方法的时候，写入一行数据到excel最后一行
     def write_cell_content(self,array,sheet=None):
-        workbook1 = load_workbook("E:\AutomationApiTest\Data\case_01.xlsx")
+        workbook1 = load_workbook("E:\AutomationApiTest\Data\Reward_User_Import_Template (1).xlsx")
         if sheet==None:
-            sheet='Mysheet'
+            sheet='Sheet3'
         sheet = workbook1[sheet]
         sheet.append(array)
-        workbook1.save("E:\AutomationApiTest\Data\case_01.xlsx")
+        workbook1.save("E:\AutomationApiTest\Data\Reward_User_Import_Template (1).xlsx")
         return sheet.append(array)
     def get_columns_value(self,key=None):
         '''

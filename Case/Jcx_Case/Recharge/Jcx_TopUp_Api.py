@@ -24,9 +24,9 @@ class JcxApi(unittest.TestCase):
         res = request.run_main('get',url=self.url,headers=headers_warrant)
         json_res = res
         print(json.dumps(json_res, indent=2, ensure_ascii=False))
-        mysql = DoMysql()
-        sql = 'SELECT m_id from qy_members_account WHERE ma_mobile = 13577777777'
-        result=mysql.fetchAll(sql)
-        print(result[0]['m_id'])
+        # mysql = DoMysql()
+        # sql = 'SELECT m_id from qy_members_account WHERE ma_mobile = 13577777777'
+        # result=mysql.fetchAll(sql)
+        # print(result[0]['m_id'])
 if __name__ == '__main__':
     unittest.main()

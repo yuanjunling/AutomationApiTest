@@ -8,7 +8,6 @@ from Driver.GenPass import GenPass
 from Driver.handle_init import handle_ini
 from Data.Headers.headers_data import *
 import logging
-import emoji
 rootpath = handle_ini.get_value('rootpath')
 file_path = rootpath + "/Log/"
 logging.basicConfig(level=logging.DEBUG,  # 控制台打印的日志级别
@@ -19,7 +18,6 @@ logging.basicConfig(level=logging.DEBUG,  # 控制台打印的日志级别
                 # 日志格式
                 )
 logger = logging.getLogger()
-logger=logging.getLogger()
 class Sunscreen(unittest.TestCase):
     def setUp(self):
         print('测试开始')
@@ -45,7 +43,6 @@ class Sunscreen(unittest.TestCase):
 
     def tearDown(self):
         print('测试结束')
-
     # @unittest.skip("test_01_reject暂时不需要执行")
     def test_01_Save(self):
         '''后台添加活动'''
