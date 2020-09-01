@@ -15,7 +15,7 @@ class BaseRequest:
         except Exception as e:
             print("post请求错误： %s" %e)
 
-    def send_get(self,url, **kwargs):
+    def send_get(self,url,**kwargs):
         params = kwargs.get("params")
         headers = kwargs.get("headers")
         try:

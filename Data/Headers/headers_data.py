@@ -4,9 +4,14 @@ headers_warrant = {
             "userId":"46110",
             "Accept-Language":"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6"
         }
-headers_Sunscreen_web = {
+headers_Sunscreen_web_uat = {
     "Content-Type": "application/json",
     "token": "s4tu1pquggmlnfj65tvnte8po7",
+    "Accept-Language":"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6"
+}
+headers_Sunscreen_web_dev = {
+    "Content-Type": "application/json",
+    "token": "32kbd7jtsllg9ju01jt7pdftq4",
     "Accept-Language":"zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6"
 }
 

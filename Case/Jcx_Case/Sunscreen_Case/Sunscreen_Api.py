@@ -51,7 +51,7 @@ class Sunscreen(unittest.TestCase):
         activityName="姬存希活动yuan{0}".format(random.randint(6,999999))
         print("活动名称："+activityName)
         json_Save['activityName']=activityName
-        res = request.run_main('post',url=self.SaveUrl,headers=headers_Sunscreen_web,json=json_Save)
+        res = request.run_main('post',url=self.SaveUrl,headers=headers_Sunscreen_web_uat,json=json_Save)
         json_res = res
         try:
             self.assertEqual(json_res["success"], True)
@@ -69,7 +69,7 @@ class Sunscreen(unittest.TestCase):
         global result
         result = self.mysql.fetchAll(sql)
         publish=self.publish.format(result[0]['id'])
-        res = request.run_main('get', url=publish, headers=headers_Sunscreen_web)
+        res = request.run_main('get', url=publish, headers=headers_Sunscreen_web_uat)
         json_res=res
         try:
             self.assertEqual(json_res["success"], True)
@@ -117,7 +117,7 @@ class Sunscreen(unittest.TestCase):
         pageApply = self.pageApply
         # print(result[0]['id'])
         json_pageApply['activityId']=result[0]['id']
-        res = request.run_main('post', url=pageApply, headers=headers_Sunscreen_web, json=json_pageApply)
+        res = request.run_main('post', url=pageApply, headers=headers_Sunscreen_web_uat, json=json_pageApply)
         json_res = res
         try:
             self.assertEqual(json_res["success"], True)
@@ -253,7 +253,7 @@ class Sunscreen(unittest.TestCase):
         sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
         json_operate['orderIdList'][0]=results[0]['id']
-        operate_res = request.run_main('post', url=operate, headers=headers_Sunscreen_web, json=json_operate)
+        operate_res = request.run_main('post', url=operate, headers=headers_Sunscreen_web_uat, json=json_operate)
         json_res_operate = operate_res
         try:
             self.assertEqual(json_res_operate["success"], True)
@@ -333,7 +333,7 @@ class Sunscreen(unittest.TestCase):
         sql = "SELECT id FROM t_activity_order WHERE activity_id = '{}'".format(result[0]['id'])
         results = self.mysql.fetchAll(sql)
         push1=self.push.format(results[0]['id'])
-        push_res = request.run_main('get', url=push1, headers=headers_Sunscreen_web)
+        push_res = request.run_main('get', url=push1, headers=headers_Sunscreen_web_uat)
         json_res_push = push_res
         try:
             self.assertEqual(json_res_push["success"], True)

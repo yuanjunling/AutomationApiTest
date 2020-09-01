@@ -17,7 +17,6 @@ class DoMysql:
         )
         #获取游标
         self.cursor = self.conn.cursor()
-
     #返回多条数据
     def fetchAll(self,sql):
         self.cursor.execute(sql)

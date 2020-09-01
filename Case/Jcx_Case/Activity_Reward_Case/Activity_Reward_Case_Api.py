@@ -26,7 +26,9 @@ class Activity_Reward(unittest.TestCase):
         rootpath = handle_ini.get_value('uat')
         self.AddReward = rootpath+"/mgmt/reward/save"
         self.openActivity = rootpath+"/mgmt/reward/enable/{}"
+        self.enableAutoApprove = rootpath +"/mgmt/reward/enableAutoApprove/{}"
         self.mysql = DoMysql("elephant")
+        self.headers_Sunscreen_web=headers_Sunscreen_web_uat
     def tearDown(self):
         print('测试结束')
     def test_01_AddReward(self):
@@ -39,7 +41,7 @@ class Activity_Reward(unittest.TestCase):
         json_AddReward['content']=''.join(random.sample(string.ascii_letters + string.digits, 50))
         json_AddReward['desc'] = ''.join(random.sample(string.ascii_letters + string.digits, 50))
 
-        res = request.run_main('post',url=AddReward,headers=headers_Sunscreen_web,json=json_AddReward)
+        res = request.run_main('post',url=AddReward,headers=self.headers_Sunscreen_web,json=json_AddReward)
         json_AddReward_res = res
         try:
             self.assertEqual(json_AddReward_res["success"], True)
@@ -57,7 +59,8 @@ class Activity_Reward(unittest.TestCase):
         global result
         result = self.mysql.fetchAll(sql)
         openActivity=self.openActivity.format(result[0]['id'])
-        res = request.run_main('get', url=openActivity, headers=headers_Sunscreen_web)
+        self.mysql.close()
+        res = request.run_main('get', url=openActivity, headers=self.headers_Sunscreen_web)
         json_res=res
         try:
             self.assertEqual(json_res["success"], True)
@@ -67,6 +70,20 @@ class Activity_Reward(unittest.TestCase):
             print("奖励活动开启测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
             raise e
         logger.debug("this= %r",json.dumps(json_res, indent=2, ensure_ascii=False))
+
+    def test_03_enableAutoApprove(self):
+        '''开启自动审批'''
+        enableAutoApprove = self.enableAutoApprove.format(result[0]['id'])
+        res = request.run_main('get', url=enableAutoApprove, headers=self.headers_Sunscreen_web)
+        json_res = res
+        try:
+            self.assertEqual(json_res["success"], True)
+            self.assertEqual(json_res['code'], '200')
+            print('奖励活动开启自动审批测试用例通过: %s' % json_res["success"])
+        except Exception as e:
+            print("奖励活动开启自动审批测试用例不通过%s" % json.dumps(json_res, indent=2, ensure_ascii=False))
+            raise e
+        logger.debug("this= %r", json.dumps(json_res, indent=2, ensure_ascii=False))
 
 if __name__ == '__main__':
     unittest.main()

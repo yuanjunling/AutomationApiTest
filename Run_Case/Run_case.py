@@ -18,4 +18,4 @@ with open(wwwa, 'wb') as f:
     runner = HTMLTestRunner_PY3.HTMLTestRunner(
         f, verbosity=2, title='防晒活动接口自动化测试报告', description='执行人：袁军令')
     runner.run(suite)
-f.close()
+    f.close()
