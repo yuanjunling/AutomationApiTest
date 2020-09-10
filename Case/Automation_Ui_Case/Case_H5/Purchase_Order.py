@@ -1,17 +1,17 @@
 # coding=utf-8
 from selenium import webdriver
-import time
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from random import choice
-import unittest,random,hashlib
+import unittest,random,hashlib,time
 from selenium.webdriver.support.wait import WebDriverWait
-from Case.Automation_Ui_Case.Login import Login_H5
 from time import sleep
+from Case.Automation_Ui_Case.Login import Login_H5
 from Driver.Public_function_Ui import is_element_exist, webdriverwait_xpath_click,webdriverwait_xpath_send_keys
 
 
 class Purchase_order(unittest.TestCase):
+
     def setUp(self):
         mobileEmulation = {'deviceName': 'iPhone 6/7/8 Plus'}
         options = webdriver.ChromeOptions()
@@ -20,6 +20,7 @@ class Purchase_order(unittest.TestCase):
         self.order_url='http://app-uat.yjdfmall.com/Wap/#/login'
         self.verificationErrors=[]
         self.accept_next_alet=True
+    # @unittest.skip('采购订单，暂时不执行')
     def test_01_order(self):
         '''采购订单'''
         driver=self.driver
@@ -37,33 +38,44 @@ class Purchase_order(unittest.TestCase):
         else:
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[1]/div/div[2]/div/div[2]/div/div')
         #搜索
+        sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[1]/div/div[3]/div/i')
+        sleep(1)
         webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[1]/div/div[2]/form/div/div/div/div[2]/div/input','姬存希官方正品水光清透隔离防晒乳隔离紫外线面部身体小晶钻新品')
+        sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[1]/div/div[3]/span')
-
+        sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div/div[2]/button')
-
+        sleep(1)
         webdriverwait_xpath_click(driver, '//*[@id="app"]/div/div[1]/div/div[1]/i')
         sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/button')#普通进货单
         sleep(1)
         element = driver.find_element_by_xpath('//*[@id="app"]/div/div[3]/div/button')
-        driver.execute_script("arguments[0].click();", element)
-        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/button')
+        driver.execute_script("arguments[0].click();", element)# 提交
+        sleep(1)
+        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div')
+        sleep(1)
+        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/ul/li[1]/div/div/div[1]')
+        sleep(1)
+        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/button')#提交订单
+        sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button')
         sleep(1)
         for i in range(6):
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')
         sleep(2)
         #截取当前窗口，并指定截图图片的保存位置
-        now = time.strftime("%Y-%m-%d %H_%M_%S", time.localtime(time.time())) #生成时间
-        file_path = 'E://AutomationApiTest//Report//Img//'
-        wwwa=file_path+now+'selenium_img.png'
-        driver.get_screenshot_as_file(wwwa)
-        sleep(5)
+        try:
+            self.assertEqual(driver.find_element_by_xpath('//*[@id="app"]/div/div[6]/div[1]').text,'提交成功')
+        except:
+            now = time.strftime("%Y-%m-%d %H_%M_%S", time.localtime(time.time())) #生成时间
+            file_path = 'E://AutomationApiTest//Report//Img//'
+            wwwa=file_path+now+'selenium_img.png'
+            driver.get_screenshot_as_file(wwwa)#自动错误截图
         driver.quit()
-        if __name__ == '__main__':
-            unittest.main()
+    if __name__ == '__main__':
+        unittest.main()
 
 
 
