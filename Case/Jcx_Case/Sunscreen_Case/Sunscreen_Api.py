@@ -113,7 +113,7 @@ class Sunscreen(unittest.TestCase):
 
     # @unittest.skip("test_05_reject暂时不需要执行")
     def test_05_pageApply(self):
-        '''报名记录'''
+        '''活动管理报名记录'''
         pageApply = self.pageApply
         # print(result[0]['id'])
         json_pageApply['activityId']=result[0]['id']
