@@ -9,6 +9,7 @@ import unittest,random,hashlib,time,json
 from selenium.webdriver.support.wait import WebDriverWait
 from time import sleep
 from Case.Automation_Ui_Case.Login import Login_H5
+from Data.Body.Json_Ui_Data import account_Order
 from Driver.Public_function_Ui import is_element_exist, webdriverwait_xpath_click, webdriverwait_xpath_send_keys,is_element
 from selenium.webdriver.support.ui import Select
 
@@ -24,10 +25,10 @@ class Purchase_order(unittest.TestCase):
         self.accept_next_alet=True
     # @unittest.skip('采购订单，暂时不执行')
     def test_01_order(self):
-        '''采购订单'''
+        '''二级发起采购订单'''
         driver=self.driver
         driver.get(self.order_url)
-        Login_H5.lonin_h5(driver,13577777777,'a111111')#调用公共登录
+        Login_H5.lonin_h5(driver,account_Order['username'],account_Order['pwd'])#调用公共登录
         sleep(2)
         driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div/div[2]').click()
         sleep(2)
@@ -43,7 +44,7 @@ class Purchase_order(unittest.TestCase):
         sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[1]/div/div[3]/div/i')
         sleep(1)
-        webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[1]/div/div[2]/form/div/div/div/div[2]/div/input','姬存希官方正品水光清透隔离防晒乳隔离紫外线面部身体小晶钻新品')
+        webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[1]/div/div[2]/form/div/div/div/div[2]/div/input',account_Order['produce'])
         sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[1]/div/div[3]/span')
         sleep(1)
@@ -68,10 +69,8 @@ class Purchase_order(unittest.TestCase):
             webdriverwait_xpath_click(driver, '//*[@id="app"]/div/div[4]/button')  # 提交订单
         else:
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div/button')
-            name="Test_name%d" % random.randrange(1, 9999, )
-            phone=random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8))
-            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[1]/div[2]/div/input',name)
-            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/input', phone)
+            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[1]/div[2]/div/input',account_Order['name'])
+            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/input', account_Order['phone'])
             status = driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[3]/div[2]/div/input')
             status.click()
             sleep(1)
@@ -106,7 +105,7 @@ class Purchase_order(unittest.TestCase):
             sleep(1)
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button')#立即支付
             sleep(2)
-            driver.find_element_by_class_name('van-uploader__input').send_keys('E://AutomationApiTest//Report//Img//selenium_img.png')
+            driver.find_element_by_class_name('van-uploader__input').send_keys(account_Order['img'])
             sleep(2)
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[3]/button')
             sleep(1)
