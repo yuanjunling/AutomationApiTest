@@ -1,14 +1,16 @@
 # coding=utf-8
+import string
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from random import choice
-import unittest,random,hashlib,time
+import unittest,random,hashlib,time,json
 from selenium.webdriver.support.wait import WebDriverWait
 from time import sleep
 from Case.Automation_Ui_Case.Login import Login_H5
-from Driver.Public_function_Ui import is_element_exist, webdriverwait_xpath_click,webdriverwait_xpath_send_keys
-
+from Driver.Public_function_Ui import is_element_exist, webdriverwait_xpath_click, webdriverwait_xpath_send_keys,is_element
+from selenium.webdriver.support.ui import Select
 
 class Purchase_order(unittest.TestCase):
 
@@ -55,27 +57,67 @@ class Purchase_order(unittest.TestCase):
         driver.execute_script("arguments[0].click();", element)# 提交
         sleep(1)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div')
-        sleep(1)
-        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/ul/li[1]/div/div/div[1]')
-        sleep(1)
-        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/button')#提交订单
-        sleep(1)
-        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button')
-        sleep(1)
-        for i in range(6):
-            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')
         sleep(2)
-        #截取当前窗口，并指定截图图片的保存位置
-        try:
-            self.assertEqual(driver.find_element_by_xpath('//*[@id="app"]/div/div[6]/div[1]').text,'提交成功')
-        except:
-            now = time.strftime("%Y-%m-%d %H_%M_%S", time.localtime(time.time())) #生成时间
-            file_path = 'E://AutomationApiTest//Report//Img//'
-            wwwa=file_path+now+'selenium_img.png'
-            driver.get_screenshot_as_file(wwwa)#自动错误截图
+
+        print(is_element(driver,'//*[@id="app"]/div/ul/li[1]/div/div/div[1]'))
+
+        if is_element(driver,'//*[@id="app"]/div/ul/li[1]/div/div/div[1]')==True:
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/ul/li[1]/div/div/div[1]')
+            sleep(2)
+            webdriverwait_xpath_click(driver, '//*[@id="app"]/div/div[4]/button')  # 提交订单
+        else:
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div/button')
+            name="Test_name%d" % random.randrange(1, 9999, )
+            phone=random.choice(['139','188','185','136','158','151'])+"".join(random.choice("0123456789") for i in range(8))
+            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[1]/div[2]/div/input',name)
+            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[2]/div[2]/div/input', phone)
+            status = driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[3]/div[2]/div/input')
+            status.click()
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[6]/div/ul[2]/li[11]')
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[6]/div/ul[2]/li[2]')
+            sleep(1)
+            webdriverwait_xpath_click(driver, '//*[@id="app"]/div/div[6]/div/ul[2]/li[2]')
+            sleep(1)
+            data = ''.join(random.sample(string.ascii_letters + string.digits, 50))
+            webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[4]/div[2]/div/textarea',data)
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div/button')
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/ul/li/div/div/div[1]')
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/button')#提交订单
+        sleep(1)
+        if is_element(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')==True:
+            for i in range(6):
+                webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')
+            sleep(2)
+            #截取当前窗口，并指定截图图片的保存位置
+            try:
+                self.assertEqual(driver.find_element_by_xpath('//*[@id="app"]/div/div[6]/div[1]').text,'提交成功')
+            except:
+                now = time.strftime("%Y-%m-%d %H_%M_%S", time.localtime(time.time())) #生成时间
+                file_path = 'E://AutomationApiTest//Report//Img//'
+                wwwa=file_path+now+'selenium_img.png'
+                driver.get_screenshot_as_file(wwwa)#自动错误截图
+        else:
+            sleep(1)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button')#立即支付
+            sleep(2)
+            driver.find_element_by_class_name('van-uploader__input').send_keys('E://AutomationApiTest//Report//Img//selenium_img.png')
+            sleep(2)
+            webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[3]/button')
+            sleep(1)
+            status=driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[1]/div[2]/div[1]').text
+            Purchaser=driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[2]').text
+            #效验订单状态
+            self.assertEquals(status,'已确认')
+
         driver.quit()
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
 
 
 

@@ -1,3 +1,5 @@
+from random import random
+
 from selenium.webdriver.support.wait import WebDriverWait
 def webdriverwait_xpath_click(driver,xpath):
     WebDriverWait(driver, 10).until(
@@ -12,10 +14,19 @@ def webdriverwait_xpath_send_keys(driver,xpath,parameter):
 def is_element_exist(driver,xpath):
     try:
         element = driver.find_element_by_xpath(xpath)
-        s = driver.execute_script("arguments[0].click();", element)
+        s = driver.execute_script("arguments[0];", element)
         if len(s) == 0:
             return False
         else:
             return True
     except Exception as e:
         e
+
+def is_element(driver,xpath):
+    try:
+        driver.find_element_by_xpath(xpath)
+        return True
+    except:
+        return False
+
+
