@@ -86,8 +86,12 @@ class Purchase_order(unittest.TestCase):
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div/button')
             sleep(1)
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/ul/li/div/div/div[1]')
-            sleep(1)
+            sleep(10)
             webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/button')#提交订单
+            sleep(2)
+            # element = driver.find_element_by_xpath('//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button/span')
+            # driver.execute_script("arguments[0].click();", element)  # 提交
+
         sleep(1)
         if is_element(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')==True:
             for i in range(6):
@@ -113,6 +117,8 @@ class Purchase_order(unittest.TestCase):
             Purchaser=driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[2]').text
             #效验订单状态
             self.assertEquals(status,'已确认')
+        sleep(5)
+
 
         driver.quit()
 if __name__ == '__main__':
