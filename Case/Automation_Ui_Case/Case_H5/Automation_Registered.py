@@ -49,12 +49,16 @@ class Automation_Registered_h5(unittest.TestCase):
         else:
             webdriverwait_xpath_click(driver, '//*[@id="app"]/div/div[1]/div/div[2]/div/div[4]/div/div')
         sleep(2)
-        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div/div[4]/div/i/div')
+        global grade
+        grade = driver.find_element_by_xpath('//div/div/span[text()="优秀省代"]').text
+        webdriverwait_xpath_click(driver,'//div/div/span[text()="省代"]')
+        # webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div/div[3]/div/i/div')
         sleep(2)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div/div/div/div')
         sleep(2)
         globals()["url"]=driver.find_element_by_class_name('van-grid-item').get_attribute('data-clipboard-text')
         print('省代邀请码: {}'.format(globals()["url"]))
+
 
     # @unittest.skip('暂时不执行')
     def test_02_Province(self):
@@ -77,7 +81,7 @@ class Automation_Registered_h5(unittest.TestCase):
         sleep(2)
         Unblock(driver,'//*[@id="app"]/div/div[2]/div[2]/div[3]/button/span')
         sleep(2)
-        self.assertEqual(driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[2]').text,'邀请人授权码：XX154422 邀请人：快乐的胖子')
+        # self.assertEqual(driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[2]').text,'邀请人授权码：XX154422 邀请人：快乐的胖子')
         webdriverwait_xpath_send_keys(driver,'//*[@id="app"]/div/div[2]/div[1]/div/div/input','a111111')
         sleep(2)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div[4]/div/div/i')
@@ -125,25 +129,80 @@ class Automation_Registered_h5(unittest.TestCase):
         sleep(2)
         webdriverwait_xpath_click(driver,'//*[@id="app"]/div/ul/li[1]/div[2]')
         sleep(2)
-        result=driver.find_elements_by_xpath('//button/span[text()="同意"]')
-        for i in range(len(result)):
+        # result=driver.find_elements_by_xpath('//button/span[text()="同意"]')
+        for i in range(result:=len(driver.find_elements_by_xpath('//button/span[text()="同意"]'))):
            sleep(2)
            Unblock(driver,'//*[@id="app"]/div/div[3]/div[1]/div[2]/div[2]/div[2]/div/div/button[2]/span')
         sleep(2)
+
+    # @unittest.skip('04暂时不执行')
     def test_04_Recharge(self):
+        '''代理升级充值'''
         driver = self.driver
         driver.get(self.order_url)
         Login_H5.lonin_h5(driver, globals()["username"], account_Order['pwd'])
         sleep(2)
-        Unblock(driver,'//*[@id="app"]/div/div[2]/div/div[3]')
+        if is_element_exist(driver,'//*[@id="app"]/div/div[2]/div/div[4]') == True:
+            Unblock(driver,'//*[@id="app"]/div/div[2]/div/div[4]')
+        else:
+            Unblock(driver,'//*[@id="app"]/div/div[2]/div/div[3]')
         sleep(2)
-        Unblock(driver,'//div/button/span[text()="升级中"]')
+        global exist
+        if (exist:=is_element(driver,'//div/button/span[text()="升级中"]'))==True:
+            sleep(1)
+            Unblock(driver,'//div/button/span[text()="升级中"]')
+            sleep(2)
+            Unblock(driver,'//button[2]/span[text()="去充值"]')
+            sleep(2)
+            driver.find_element_by_class_name('van-uploader__input').send_keys(account_Order['img'])
+            sleep(2)
+            Unblock(driver,'//*[@id="app"]/div/div[3]/button/span')
+            sleep(2)
+        else:
+            print(driver.find_element_by_xpath('//*[@id="app"]/div/div[1]/div/div[1]/div/div[1]/div[1]/div[2]/span').text)
+    # @unittest.skip('暂时不执行')
+    def test_05_Recharge_approved_by_superior(self):
+        driver = self.driver
+        driver.get(self.order_url)
+        Login_H5.lonin_h5(driver, account_Order['username'], account_Order['pwd'])  # 调用公共登录
         sleep(2)
-        Unblock(driver,'//button[2]/span[text()="去充值"]')
+        driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div/div[2]').click()
+        sleep(2)
+        if is_element_exist(driver, '//*[@id="app"]/div/div[1]/div/div[4]/div[1]') == True:
+            # 判断有无充值公告有就点击没有就下一步
+            driver.find_element_by_xpath('//*[@id="app"]/div/div[1]/div/div[4]/div[3]/button').click()
+            sleep(1)
+            driver.find_element_by_xpath('//*[@id="app"]/div/div[1]/div/div[1]/i').click()
+            webdriverwait_xpath_click(driver, '//div/span[text()="我的审批"]')
+        else:
+            webdriverwait_xpath_click(driver, '//div/span[text()="我的审批"]')
+        sleep(2)
+        webdriverwait_xpath_click(driver,'//span[text()="充值审批"]')
+        sleep(2)
+        for i in range(result:=len(driver.find_elements_by_xpath('//span[text()="加入平台充值"]'))):
+            if result == 0:
+                print('审批订单数{}'.format(result))
+            else:
+               sleep(2)
+               Unblock(driver,'//*[@id="app"]/div/div[3]/div/div[1]/div[1]/div[2]/button[2]/span')
+               sleep(1)
+               Unblock(driver,'//span[text()="确定加入"]')
+        sleep(2)
+        Unblock(driver,'//span[text()="发起平台充值"]')
         sleep(2)
         driver.find_element_by_class_name('van-uploader__input').send_keys(account_Order['img'])
         sleep(2)
-        Unblock(driver,'//*[@id="app"]/div/div[3]/button/span')
+        Unblock(driver,'//span[text()="提交"]')
         sleep(5)
+
+    @unittest.skip('暂时不执行')
+    def test_06_Background_approval(self):
+        self.driver = webdriver.Chrome()
+        driver = self.driver
+        driver.maximize_window()
+        driver.get('http://app-uat.yjdfmall.com/Web/#/login')
+        sleep(5)
+
+
 if __name__ == '__main__':
     unittest.main()
