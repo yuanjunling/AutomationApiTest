@@ -11,6 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from time import sleep
 from Case.Automation_Ui_Case.Login import Login_H5
 from Data.Body.Json_Ui_Data import account_Order
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from Driver.Public_function_Ui import is_element_exist, webdriverwait_xpath_click, webdriverwait_xpath_send_keys, \
     is_element, Unblock
 from selenium.webdriver.support.ui import Select
@@ -21,7 +22,7 @@ class Automation_Registered_h5(unittest.TestCase):
         options = webdriver.ChromeOptions()
         options.add_experimental_option('mobileEmulation', mobileEmulation)
         self.driver = webdriver.Chrome(chrome_options=options)
-        self.order_url = 'http://app-uat.yjdfmall.com/Wap/#/login'
+        self.order_url = 'http://app-uat.yjdfmall.com/Wap/#/login?redirect=%2Fhome'
         self.verificationErrors = []
         self.accept_next_alet = True
     @classmethod
@@ -49,8 +50,6 @@ class Automation_Registered_h5(unittest.TestCase):
         else:
             webdriverwait_xpath_click(driver, '//*[@id="app"]/div/div[1]/div/div[2]/div/div[4]/div/div')
         sleep(2)
-        global grade
-        grade = driver.find_element_by_xpath('//div/div/span[text()="优秀省代"]').text
         webdriverwait_xpath_click(driver,'//div/div/span[text()="省代"]')
         # webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[2]/div/div[3]/div/i/div')
         sleep(2)
@@ -197,12 +196,16 @@ class Automation_Registered_h5(unittest.TestCase):
 
     @unittest.skip('暂时不执行')
     def test_06_Background_approval(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.ChromeOptions()
         driver = self.driver
+        dcap = dict(DesiredCapabilities.PHANTOMJS)
+        dcap['phantomjs.page.settings.Accept-Language']='zh-CN'
+        dcap['phantomjs.page.settings.token'] = 'licjf40q4scstcidlu07lmset6'
+        dcap['phantomjs.page.settings.version'] = '1.0'
+        dcap['phantomjs.page.settings.clientType'] = '2'
+        driver = webdriver.Chrome(chrome_options=dcap)
         driver.maximize_window()
-        driver.get('http://app-uat.yjdfmall.com/Web/#/login')
+        driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
         sleep(5)
-
-
 if __name__ == '__main__':
     unittest.main()
