@@ -206,6 +206,8 @@ class Automation_Registered_h5(unittest.TestCase):
         driver = webdriver.Chrome(chrome_options=dcap)
         driver.maximize_window()
         driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
+        driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
+        driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
         sleep(5)
 if __name__ == '__main__':
     unittest.main()
