@@ -91,9 +91,9 @@ class Purchase_order(unittest.TestCase):
             sleep(2)
             # element = driver.find_element_by_xpath('//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button/span')
             # driver.execute_script("arguments[0].click();", element)  # 提交
-
-        sleep(1)
-        if is_element(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')==True:
+        webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[2]/div[2]/div[3]/button')
+        sleep(2)
+        if driver.find_element_by_xpath('//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[1]/p').text=='首次使用请点击忘记密码进行重置':
             for i in range(6):
                 webdriverwait_xpath_click(driver,'//*[@id="app"]/div/div[4]/div[3]/div[2]/div[2]/div[2]/ul/li[1]')
             sleep(2)

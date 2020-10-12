@@ -194,20 +194,5 @@ class Automation_Registered_h5(unittest.TestCase):
         Unblock(driver,'//span[text()="提交"]')
         sleep(5)
 
-    @unittest.skip('暂时不执行')
-    def test_06_Background_approval(self):
-        self.driver = webdriver.ChromeOptions()
-        driver = self.driver
-        dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap['phantomjs.page.settings.Accept-Language']='zh-CN'
-        dcap['phantomjs.page.settings.token'] = 'licjf40q4scstcidlu07lmset6'
-        dcap['phantomjs.page.settings.version'] = '1.0'
-        dcap['phantomjs.page.settings.clientType'] = '2'
-        driver = webdriver.Chrome(chrome_options=dcap)
-        driver.maximize_window()
-        driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
-        driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
-        driver.get('http://app-uat.yjdfmall.com/Web/#/memberManage/exitAgent')
-        sleep(5)
 if __name__ == '__main__':
     unittest.main()
