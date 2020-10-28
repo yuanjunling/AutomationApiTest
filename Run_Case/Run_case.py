@@ -3,15 +3,18 @@
 import unittest
 import HTMLTestRunner_PY3
 import time
-
-from Case.Test_Demo import ZNcase_01
+import sys
+sys.path.append('E:\AutomationApiTest')
+# from Case.Test_Demo import ZNcase_01
 from Driver.handle_init import handle_ini
-from Case.Jcx_Case.Sunscreen_Case import Sunscreen_Api
+# from Case.Jcx_Case.Sunscreen_Case import Sunscreen_Api
 from Case.Automation_Ui_Case.Case_H5.Automation_Registered import Automation_Registered_h5 as h5
+from Case.Automation_Ui_Case.Case_web.Test_Demo import Automation_Registered_web as web
 
 suite = unittest.TestSuite()
 # suite.addTest(unittest.makeSuite(Sunscreen_Api.Sunscreen))
 suite.addTest(unittest.makeSuite(h5))
+
 now = time.strftime("%Y-%m-%d %H_%M_%S", time.localtime(time.time()))
 rootpath = handle_ini.get_value('rootpath')
 file_path = rootpath + "/Report/"

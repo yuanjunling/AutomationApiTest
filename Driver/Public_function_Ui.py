@@ -28,6 +28,13 @@ def is_element(driver,xpath):
         return True
     except:
         return False
+
+def is_element_class(driver,classname):
+    try:
+        driver.find_element_by_class_name(classname)
+        return True
+    except:
+        return False
 #取消异常拦截
 def Unblock(driver,xpath):
     try:

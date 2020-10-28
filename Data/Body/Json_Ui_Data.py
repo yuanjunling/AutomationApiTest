@@ -3,9 +3,10 @@ import json
 import string
 
 from Driver.IdentityCard import IdNumber
-
+name = ['13555555555','13657473031','13615750655','13946755805','13687011854']
+namedate = random.choice(name)
 account_Order={
-    'username':'13555555555',
+    'username':namedate,
     'pwd':'a111111',
     'produce':'测试商品7',
     'name':"Test_name%d" % random.randrange(1, 9999, ),
@@ -17,5 +18,5 @@ account_Order={
     'Address':''.join(random.sample(string.ascii_letters + string.digits, 50))
 }
 
-print(account_Order['IdNumber'])
-print(account_Order['Number'])
+
+
